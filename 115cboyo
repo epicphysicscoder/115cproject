@@ -5,7 +5,7 @@ timestep = 0.01;
 startDetuning = -10;
 endDetuning = 10;
 sweepTime = 50
-i=1
+for i = [1:sweepTime]
     detuning = i*(endDetuning - startDetuning)/sweepTime + startDetuning
     [basisvectors,Eigenvalues] = eig(hamiltoniandetuning(Omega,detuning,coupling))
     Energymatrix = basisvectors.' * hamiltoniandetuning(Omega,detuning,coupling) * basisvectors
@@ -13,8 +13,9 @@ i=1
     E2(i) = Energymatrix(2,2)
     E3(i) = Energymatrix(3,3)
     E4(i) = Energymatrix(4,4)
-    final = [E1, E2, E3, E4]
     
+end
+final = [E1, E2, E3, E4]
 end
 
 
