@@ -1,0 +1,31 @@
+function [final] = hamiltoniandetunin2g(coupling)
+Omega = 10;
+coupling = 2;
+timestep = 0.01;
+startDetuning = -10;
+endDetuning = 10;
+sweepTime = 50
+i=1
+    detuning = i*(endDetuning - startDetuning)/sweepTime + startDetuning
+    [basisvectors,Eigenvalues] = eig(hamiltoniandetuning(Omega,detuning,coupling))
+    Energymatrix = basisvectors.' * hamiltoniandetuning(Omega,detuning,coupling) * basisvectors
+    E1(i) = Energymatrix(1,1)
+    E2(i) = Energymatrix(2,2)
+    E3(i) = Energymatrix(3,3)
+    E4(i) = Energymatrix(4,4)
+    final = [E1, E2, E3, E4]
+    
+end
+
+
+
+
+    function hamiltoniandetuning(Omega,detuning,coupling)
+        o1 = Omega - detuning*0.5
+        o2 = Omega + detuning*0.5
+        output = hamiltonian(o1,o2,coupling)
+    end
+
+    function hamiltonian_out = hamiltonian(omega1,omega2,coupling)
+        hamiltonian_out = 0.5*omega1*[1 0 0 0; 0 1 0 0; 0 0 -1 0; 0 0 0 -1] + 0.5*omega2*[1 0 0 0; 0 -1 0 0; 0 0 1 0; 0 0 0 -1] + 0.25*coupling*[1 0 0 0; 0 -1 2 0; 0 2 -1 0; 0 0 0 1]
+    end
